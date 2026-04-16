@@ -10,6 +10,16 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+
+### Changed
+- Switch the stacklevel in logger (function name instead of `__call__` in the logfile)
+
+### Fixed
+- Fixed the `clean_handlers` call in the main pipeline
+
+
 ---
 
 ## [1.3.1] - 2026-04-10

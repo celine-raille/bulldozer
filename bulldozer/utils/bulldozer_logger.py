@@ -167,10 +167,14 @@ class Runtime:
             the function output.
         """
         func_start = time.perf_counter()
-        logger.debug(f"{self.function.__name__}: Starting...")
+        logger.debug(f"{self.function.__name__}: Starting...", stacklevel=2)
         # Function run
-        result = self.function(*args, **kwargs)
-        func_end = time.perf_counter()
-        logger.info(f"{self.function.__name__}: Done (Runtime: {round(func_end - func_start, 2)}s)")
-
+        try:
+            result = self.function(*args, **kwargs)
+            func_end = time.perf_counter()
+            logger.info(f"{self.function.__name__}: Done (Runtime: {round(func_end - func_start, 2)}s)", stacklevel=2)
+        finally:
+            # Remove the logger handlers at the end of the main function
+            if self.function.__name__ == "dsm_to_dtm":
+                clean_handlers()
         return result
